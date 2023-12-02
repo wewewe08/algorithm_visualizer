@@ -1,12 +1,12 @@
 #include <SFML/Graphics.hpp>
-#include "SortingAlgorithm.h"
-#include "Button.h"
+#include "header-files/SortingAlgorithm.h"
+#include "header-files/Button.h"
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "Algorithm Visualizer", sf::Style::Default);
+    sf::RenderWindow window(sf::VideoMode(800,600), "Algorithm Visualizer", sf::Style::Titlebar | sf::Style::Close);
 
-    int numBars = 100;
+    int numBars = 80;
     std::vector<sf::RectangleShape> bars;
     SortingAlgorithm sortingAlgorithm(window, bars, numBars);
 
@@ -14,16 +14,26 @@ int main()
     std::mt19937 rng(rd()); // creates a Mersenne Twister pseudo-random number generator and seeds it with the value from "rd"
     sortingAlgorithm.RandomizeArray(numBars, rng);
 
+    sf::Font satoshi_font;
+    satoshi_font.loadFromFile("fonts/Satoshi-Medium.ttf");
+
     Button randomizeButton(window, "Generate new array", sf::Color::White, sf::Color::Black);
-    randomizeButton.SetPosition({100,300});
+    randomizeButton.SetPosition({100,450});
+    randomizeButton.SetTextFont(satoshi_font);
 
     while (window.isOpen())
     {
         sf::Event event;
         while (window.pollEvent(event))
         {
-            if (event.type == sf::Event::Closed)
-                window.close();
+            switch (event.type) {
+                case sf::Event::Closed:
+                    window.close();
+                case sf::Event::MouseButtonPressed:
+                    if (randomizeButton.MouseHovering()) {
+                        sortingAlgorithm.RandomizeArray(numBars, rng);
+                    }
+            } 
         }
 
         window.clear();

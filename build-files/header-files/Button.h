@@ -10,10 +10,10 @@ class Button {
         Button(sf::RenderWindow& w, std::string t, sf::Color bgColor, sf::Color textColor) : window(w)
         {
             text.setString(t);
-            text.setColor(textColor);
+            text.setFillColor(textColor);
             text.setCharacterSize(20);
 
-            button.setSize({200, 50});
+            button.setSize({100, 50});
             button.setFillColor(bgColor);
         }
 
@@ -25,9 +25,30 @@ class Button {
             text.setPosition({textXPos, textYPos});
         }
 
+        void SetTextFont(sf::Font& font) {
+            text.setFont(font);
+        }
+
         void DrawButton() {
             window.draw(button);
             window.draw(text);
+        }
+
+        bool MouseHovering() {
+            float mouseX = sf::Mouse::getPosition(window).x;
+            float mouseY = sf::Mouse::getPosition(window).y;
+
+            float buttonPosX = button.getPosition().x;
+            float buttonPosY = button.getPosition().y;
+
+            float buttonPosWidth = buttonPosX + button.getLocalBounds().width;
+            float buttonPosHeight = buttonPosY + button.getLocalBounds().height;
+
+            if (mouseX < buttonPosWidth && mouseX > buttonPosX && mouseY < buttonPosHeight && mouseY > buttonPosY) {
+                return true;
+            }
+            
+            return false;
         }
 
     private:
