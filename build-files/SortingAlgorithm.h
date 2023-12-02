@@ -9,7 +9,7 @@
 
 class SortingAlgorithm {
     public:
-        SortingAlgorithm(sf::RenderWindow& window, std::vector<sf::RectangleShape>& b, int arrSize);
+        SortingAlgorithm(sf::RenderWindow& window, std::vector<sf::RectangleShape>& bars, int arrSize);
 
         void RandomizeArray(int arrSize, std::mt19937& rng);
         void DrawBars();
