@@ -18,8 +18,8 @@ class SortingAlgorithm {
         sf::RenderWindow& window;
         std::vector<sf::RectangleShape> bars;
 
-        int barWidth{40};
-        int spacing{10};
+        int barWidth{};
+        int spacing{};
         float totalWidth{};
         float startX{};
 };
