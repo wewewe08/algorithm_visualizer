@@ -1,16 +1,22 @@
-CLEAN_FILES = *.o 
+SRC_DIR := src
+BUILD_DIR := build-files
 
-COMPILE_FILES = *.cpp
+SRC_FILES := $(wildcard $(SRC_DIR)/*.cpp)
+OBJ_FILES := $(patsubst $(SRC_DIR)/%.cpp,$(BUILD_DIR)/%.o,$(SRC_FILES))
+
+CLEAN_FILES := $(OBJ_FILES) main.exe
 
 all: compile link
 
-compile:
-	g++ -Isrc/include -c build-files/${COMPILE_FILES}
+compile: $(OBJ_FILES)
 
-link:
-	g++ main.o -o main -mwindows -Lsrc/lib -lsfml-graphics -lsfml-window -lsfml-system
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
+	g++ -I$(SRC_DIR)/include -c $< -o $@
+
+link: $(OBJ_FILES)
+	g++ $(OBJ_FILES) -o main -mwindows -L$(SRC_DIR)/lib -lsfml-graphics -lsfml-window -lsfml-system
 
 clean:
-	@echo "cleaning project files..."
-	del /Q /F main.exe ${CLEAN_FILES}
-	@echo "clean successful."
+	@echo "Cleaning project files..."
+	del /Q /F main.exe $(CLEAN_FILES)
+	@echo "Clean successful."

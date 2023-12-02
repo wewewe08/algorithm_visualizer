@@ -1,11 +1,12 @@
 #include <SFML/Graphics.hpp>
+#include <iostream>
+#include <stdio.h>
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+    sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "Algorithm Visualizer", sf::Style::Default);
 
+    std::cout << "Testing output" << std::endl;
     while (window.isOpen())
     {
         sf::Event event;
@@ -16,7 +17,7 @@ int main()
         }
 
         window.clear();
-        window.draw(shape);
+
         window.display();
     }
 
