@@ -1,8 +1,7 @@
 SRC_DIR := src
 BUILD_DIR := build-files
 
-COMPILE_FILES = $(wildcard $(BUILD_DIR)/*.cpp)
-OBJ_FILES := $(patsubst $(BUILD_DIR)/%.cpp, %.o, ${COMPILE_FILES})
+OBJ_FILES := $(patsubst $(BUILD_DIR)/%.cpp, %.o, $(wildcard $(BUILD_DIR)/%.cpp))
 
 PROGRAM := visualizer
 
