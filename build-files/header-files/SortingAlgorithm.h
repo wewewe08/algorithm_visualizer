@@ -1,7 +1,6 @@
 // SortingAlgorithm.h
 
-#ifndef SORTING_ALGORITHM_H
-#define SORTING_ALGORITHM_H
+#pragma once
 
 #include <SFML/Graphics.hpp>
 #include <vector>
@@ -18,8 +17,23 @@ class SortingAlgorithm {
             startX = (window.getSize().x - totalWidth) / 2.0f;
         }
 
-        void RandomizeArray(int arrSize, std::mt19937& rng);
-        void DrawBars();
+        void RandomizeArray(int arrSize, std::mt19937 &rng) {
+            std::uniform_int_distribution<std::mt19937::result_type> distribution(50, 300); // this produces random integers within the given range
+
+            for (int i = 0; i < arrSize; ++i) {
+                sf::RectangleShape bar(sf::Vector2f(barWidth, distribution(rng)));
+                float barYPos = (window.getSize().y / 2.0f) - bar.getSize().y;
+
+                bar.setPosition(startX + i * (barWidth + spacing), barYPos);
+                bars.push_back(bar);
+            }
+        }
+
+        void DrawBars() {
+            for (const sf::RectangleShape bar : bars) {
+                window.draw(bar);
+            }
+        }
 
     private:
         sf::RenderWindow& window;
@@ -30,5 +44,3 @@ class SortingAlgorithm {
         float totalWidth{};
         float startX{};
 };
-
-#endif // SORTING_ALGORITHM_H
