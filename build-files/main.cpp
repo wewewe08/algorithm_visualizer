@@ -1,12 +1,18 @@
 #include <SFML/Graphics.hpp>
-#include <iostream>
-#include <stdio.h>
+#include "SortingAlgorithm.h"
 
 int main()
 {
     sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "Algorithm Visualizer", sf::Style::Default);
 
-    std::cout << "Testing output" << std::endl;
+    int numBars = 10;
+    std::vector<sf::RectangleShape> bars;
+    SortingAlgorithm sortingAlgorithm(window, bars, numBars);
+
+    std::random_device rd; // this is a random device object used to generate random numbers
+    std::mt19937 rng(rd()); // creates a Mersenne Twister pseudo-random number generator and seeds it with the value from "rd"
+    sortingAlgorithm.RandomizeArray(numBars, rng);
+
     while (window.isOpen())
     {
         sf::Event event;
@@ -17,6 +23,8 @@ int main()
         }
 
         window.clear();
+
+        sortingAlgorithm.DrawBars();
 
         window.display();
     }
