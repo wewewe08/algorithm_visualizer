@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "SortingAlgorithm.h"
+#include "Button.h"
 
 int main()
 {
@@ -13,6 +14,9 @@ int main()
     std::mt19937 rng(rd()); // creates a Mersenne Twister pseudo-random number generator and seeds it with the value from "rd"
     sortingAlgorithm.RandomizeArray(numBars, rng);
 
+    Button randomizeButton(window, "Generate new array", sf::Color::White, sf::Color::Black);
+    randomizeButton.SetPosition({100,300});
+
     while (window.isOpen())
     {
         sf::Event event;
@@ -25,6 +29,7 @@ int main()
         window.clear();
 
         sortingAlgorithm.DrawBars();
+        randomizeButton.DrawButton();
 
         window.display();
     }
