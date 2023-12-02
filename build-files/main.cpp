@@ -5,7 +5,7 @@ int main()
 {
     sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "Algorithm Visualizer", sf::Style::Default);
 
-    int numBars = 10;
+    int numBars = 100;
     std::vector<sf::RectangleShape> bars;
     SortingAlgorithm sortingAlgorithm(window, bars, numBars);
 
