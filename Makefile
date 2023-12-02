@@ -1,7 +1,7 @@
 SRC_DIR := src
 BUILD_DIR := build-files
 
-OBJ_FILES := $(patsubst $(BUILD_DIR)/%.cpp, %.o, $(wildcard $(BUILD_DIR)/%.cpp))
+OBJ_FILES := $(patsubst $(BUILD_DIR)/%.cpp, %.o, $(wildcard $(BUILD_DIR)/*.cpp))
 
 PROGRAM := visualizer
 
@@ -17,3 +17,6 @@ clean:
 	@echo "Cleaning project files..."
 	del /Q /F ${PROGRAM}.exe ${OBJ_FILES}
 	@echo "Clean successful."
+
+run: link
+	${PROGRAM}.exe
