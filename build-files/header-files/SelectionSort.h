@@ -6,6 +6,7 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
+#include <mutex>
 
 class SelectionSort : public SortingAlgorithm {
     public:
@@ -21,9 +22,12 @@ class SelectionSort : public SortingAlgorithm {
             window.display();
         }
 
-        void SwapBars(sf::RectangleShape &a, sf::RectangleShape &b, int &index) {
+        void ChangeColors(sf::RectangleShape &bar, sf::Color color) {
+            bar.setFillColor(color);
+        }
+
+        void SwapBars(sf::RectangleShape &a, sf::RectangleShape &b, int &index, int &minIndex) {
             sf::Vector2f tempSizeA = a.getSize();
-            sf::Vector2f tempSizeB = b.getSize();
 
             a.setSize(b.getSize());
             float barAYPos = (window.getSize().y / 2.0f) - a.getSize().y;
@@ -32,31 +36,34 @@ class SelectionSort : public SortingAlgorithm {
             a.setFillColor(sf::Color::Green);
 
             b.setSize(tempSizeA);
-            //float barBYPos = (window.getSize().y / 2.0f) - b.getSize().y;
-            //b.setPosition(startX + index * (barWidth + spacing), barBYPos);
-
+            float barBYPos = (window.getSize().y / 2.0f) - b.getSize().y;
+            b.setPosition(startX + minIndex * (barWidth + spacing), barBYPos);
             ResetWindow();
         }
 
         void RunSelectionSort() {
             for (int i = 0; i < arrSize - 1; ++i) {
                 int minIndex = i;
+                ChangeColors(SortingAlgorithm::bars[minIndex], sf::Color::Red);
                 for (int j = i + 1; j < arrSize; ++j) {
-                    SortingAlgorithm::bars[j].setFillColor(sf::Color::Red);
+                    ChangeColors(SortingAlgorithm::bars[j], sf::Color::Red);
+                    std::lock_guard<std::mutex> lock(mutex);
                     if (SortingAlgorithm::bars[j].getSize().y < SortingAlgorithm::bars[minIndex].getSize().y) {
+                        ChangeColors(SortingAlgorithm::bars[minIndex], sf::Color::White);
                         minIndex = j;
-                        SortingAlgorithm::bars[minIndex].setFillColor(sf::Color::Red);
+                        ChangeColors(SortingAlgorithm::bars[minIndex], sf::Color::Red);
                     }
                     ResetWindow();
-                    SortingAlgorithm::bars[j].setFillColor(sf::Color::White);
-                    //SortingAlgorithm::bars[minIndex].setFillColor(sf::Color::White);
+                    ChangeColors(SortingAlgorithm::bars[j], sf::Color::White);
                 }
                 // swapping elements
-                SwapBars(SortingAlgorithm::bars[i], SortingAlgorithm::bars[minIndex], i);
+                SwapBars(SortingAlgorithm::bars[i], SortingAlgorithm::bars[minIndex], i, minIndex);
+                ResetWindow();
             }
             std::cout << "Finished selection sort." << std::endl;
         }
 
     private:
         sf::RenderWindow& window;
+        std::mutex mutex; // synchronization
 };
