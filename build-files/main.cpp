@@ -8,14 +8,11 @@ int main()
 
     int numBars = 80;
     std::vector<sf::RectangleShape> bars;
+    std::random_device rd;
     SortingAlgorithm sortingAlgorithm(window, bars, numBars);
 
-    std::random_device rd; // this is a random device object used to generate random numbers
-    std::mt19937 rng(rd()); // creates a Mersenne Twister pseudo-random number generator and seeds it with the value from "rd"
-    sortingAlgorithm.RandomizeArray(numBars, rng);
-
     sf::Font satoshi_font;
-    satoshi_font.loadFromFile("fonts/Satoshi-Medium.ttf");
+    satoshi_font.loadFromFile("satoshi.ttf");
 
     Button randomizeButton(window, "Generate new array", sf::Color::White, sf::Color::Black);
     randomizeButton.SetPosition({100,450});
@@ -31,6 +28,7 @@ int main()
                     window.close();
                 case sf::Event::MouseButtonPressed:
                     if (randomizeButton.MouseHovering()) {
+                        std::mt19937 rng(rd());
                         sortingAlgorithm.RandomizeArray(numBars, rng);
                     }
             } 

@@ -13,7 +13,7 @@ class Button {
             text.setFillColor(textColor);
             text.setCharacterSize(20);
 
-            button.setSize({100, 50});
+            button.setSize({150, 50});
             button.setFillColor(bgColor);
         }
 
@@ -23,6 +23,10 @@ class Button {
             float textXPos = (pos.x + button.getGlobalBounds().width / 2) - (text.getGlobalBounds().width / 2);
             float textYPos = (pos.y + button.getGlobalBounds().height / 2) - (text.getGlobalBounds().height / 2);
             text.setPosition({textXPos, textYPos});
+        }
+
+        void SetButtonColor(sf::Color color) {
+            button.setFillColor(color);
         }
 
         void SetTextFont(sf::Font& font) {
@@ -47,7 +51,7 @@ class Button {
             if (mouseX < buttonPosWidth && mouseX > buttonPosX && mouseY < buttonPosHeight && mouseY > buttonPosY) {
                 return true;
             }
-            
+
             return false;
         }
 
