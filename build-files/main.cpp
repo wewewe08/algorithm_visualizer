@@ -1,5 +1,10 @@
 #include <SFML/Graphics.hpp>
+#include <thread>
+#include <chrono>
+
 #include "header-files/SortingAlgorithm.h"
+#include "header-files/SelectionSort.h"
+
 #include "header-files/ImageButton.h"
 
 int main()
@@ -9,11 +14,14 @@ int main()
     int numBars = 80;
     std::vector<sf::RectangleShape> bars;
     std::random_device rd;
-    SortingAlgorithm sortingAlgorithm(window, bars, numBars);
+    SelectionSort selectionAlgorithm(window, bars, numBars);
 
     std::string imgPath = "images/randomizeButton.png";
     ImageButton randomizeButton(window, imgPath);
     randomizeButton.SetPosition({100,450});
+
+    std::mt19937 rng(rd());
+    selectionAlgorithm.RandomizeArray(numBars, rng);
 
     while (window.isOpen())
     {
@@ -23,17 +31,21 @@ int main()
             switch (event.type) {
                 case sf::Event::Closed:
                     window.close();
+                    break;
                 case sf::Event::MouseButtonPressed:
                     if (randomizeButton.MouseHovering()) {
-                        std::mt19937 rng(rd());
-                        sortingAlgorithm.RandomizeArray(numBars, rng);
+                        std::cout << "Button pressed" << std::endl;
+                        //std::mt19937 rng(rd());
+                        //selectionAlgorithm.RandomizeArray(numBars, rng);
+                        selectionAlgorithm.RunSelectionSort();
                     }
+                    break;
             } 
         }
 
         window.clear();
 
-        sortingAlgorithm.DrawBars();
+        selectionAlgorithm.DrawBars();
         randomizeButton.DrawButton();
 
         window.display();
