@@ -35,8 +35,8 @@ int main()
                 case sf::Event::MouseButtonPressed:
                     if (randomizeButton.MouseHovering()) {
                         std::cout << "Button pressed" << std::endl;
-                        //std::mt19937 rng(rd());
-                        //selectionAlgorithm.RandomizeArray(numBars, rng);
+                        std::mt19937 rng(rd());
+                        selectionAlgorithm.RandomizeArray(numBars, rng);
                         selectionAlgorithm.RunSelectionSort();
                     }
                     break;
