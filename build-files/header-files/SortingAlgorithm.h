@@ -6,6 +6,8 @@
 #include <vector>
 #include <random>
 #include <iostream>
+#include <thread>
+#include <chrono>
 
 class SortingAlgorithm {
     public:
@@ -35,6 +37,26 @@ class SortingAlgorithm {
             for (const auto &bar : bars) {
                 window.draw(bar);
             }
+        }
+
+        void ChangeColors(sf::RectangleShape &bar, sf::Color color) {
+            bar.setFillColor(color);
+        }
+
+        void ResetWindow() {
+            std::this_thread::sleep_for(std::chrono::milliseconds(30));
+
+            window.clear();
+            DrawBars();
+            window.display();
+        }
+
+        void ResetThreads(std::vector<std::thread> &colorChangeThreads) {
+            for (auto& thread : colorChangeThreads) {
+                thread.join();
+            }
+
+            colorChangeThreads.clear();
         }
     
     protected:
