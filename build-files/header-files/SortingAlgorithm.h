@@ -20,6 +20,10 @@ class SortingAlgorithm {
         void RandomizeArray(int arrSize, std::mt19937 &rng) {
             std::uniform_int_distribution<std::mt19937::result_type> distribution(50, 200); // this produces random integers within the given range
 
+            if (!bars.empty()) {
+                bars.clear();
+            }
+
             for (int i = 0; i < arrSize; ++i) {
                 sf::RectangleShape bar(sf::Vector2f(barWidth, distribution(rng)));
                 float barYPos = (window.getSize().y / 2.0f) - bar.getSize().y;
