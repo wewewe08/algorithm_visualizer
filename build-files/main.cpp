@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "header-files/SortingAlgorithm.h"
-#include "header-files/Button.h"
+#include "header-files/ImageButton.h"
 
 int main()
 {
@@ -16,9 +16,9 @@ int main()
         std::cerr << "Failed to load font." << std::endl;  //error handling
     }
 
-    Button randomizeButton(window, "New array", sf::Color::White, sf::Color::Black);
+    std::string imgPath = "images/randomizeButton";
+    ImageButton randomizeButton(window, imgPath);
     randomizeButton.SetPosition({100,450});
-    randomizeButton.SetTextFont(satoshi_font);
 
     while (window.isOpen())
     {
