@@ -14,7 +14,7 @@ class ImageButton {
             }
 
             button.setTexture(image);
-            button.setScale(0.2f, 0.2f);
+            button.setScale(1.0f, 1.0f);
         }
 
         void SetPosition(sf::Vector2f pos) {

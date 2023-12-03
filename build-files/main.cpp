@@ -11,12 +11,7 @@ int main()
     std::random_device rd;
     SortingAlgorithm sortingAlgorithm(window, bars, numBars);
 
-    sf::Font satoshi_font;
-    if (!satoshi_font.loadFromFile("fonts/satoshi.ttf")) {
-        std::cerr << "Failed to load font." << std::endl;  //error handling
-    }
-
-    std::string imgPath = "images/randomizeButton";
+    std::string imgPath = "images/randomizeButton.png";
     ImageButton randomizeButton(window, imgPath);
     randomizeButton.SetPosition({100,450});
 
