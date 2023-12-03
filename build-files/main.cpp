@@ -12,9 +12,11 @@ int main()
     SortingAlgorithm sortingAlgorithm(window, bars, numBars);
 
     sf::Font satoshi_font;
-    satoshi_font.loadFromFile("fonts/satoshi.ttf");
+    if (!satoshi_font.loadFromFile("fonts/satoshi.ttf")) {
+        std::cerr << "Failed to load font." << std::endl;  //error handling
+    }
 
-    Button randomizeButton(window, "Generate new array", sf::Color::White, sf::Color::Black);
+    Button randomizeButton(window, "New array", sf::Color::White, sf::Color::Black);
     randomizeButton.SetPosition({100,450});
     randomizeButton.SetTextFont(satoshi_font);
 

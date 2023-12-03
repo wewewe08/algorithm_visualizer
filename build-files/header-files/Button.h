@@ -19,10 +19,22 @@ class Button {
 
         void SetPosition(sf::Vector2f pos) {
             button.setPosition(pos);
+            sf::Vector2f buttonCenter = { pos.x + button.getSize().x / 2, pos.y + button.getSize().y / 2 };
 
-            float textXPos = (pos.x + button.getGlobalBounds().width / 2) - (text.getGlobalBounds().width / 2);
-            float textYPos = (pos.y + button.getGlobalBounds().height / 2) - (text.getGlobalBounds().height / 2);
-            text.setPosition({textXPos, textYPos});
+            sf::FloatRect textBounds = text.getLocalBounds();
+
+            text.setOrigin(textBounds.width / 2, textBounds.height / 2); // set origin of text to its center
+            text.setPosition(pos);
+
+            // text scaling
+            if (textBounds.width > button.getSize().x) {
+                float scale = button.getSize().x / textBounds.width;
+                text.setScale(scale, 1.0f);
+                std::cout << "out of bounds" << std::endl;
+            } else {
+                text.setScale(1.0f, 1.0f);
+                std::cout << "not out of bounds" << std::endl;
+            }
         }
 
         void SetButtonColor(sf::Color color) {
