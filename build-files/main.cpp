@@ -12,7 +12,7 @@ int main()
     SortingAlgorithm sortingAlgorithm(window, bars, numBars);
 
     sf::Font satoshi_font;
-    satoshi_font.loadFromFile("satoshi.ttf");
+    satoshi_font.loadFromFile("fonts/satoshi.ttf");
 
     Button randomizeButton(window, "Generate new array", sf::Color::White, sf::Color::Black);
     randomizeButton.SetPosition({100,450});
