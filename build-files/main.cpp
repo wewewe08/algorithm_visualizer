@@ -12,6 +12,7 @@ int main()
     sf::RenderWindow window(sf::VideoMode(800,600), "Algorithm Visualizer", sf::Style::Titlebar | sf::Style::Close);
 
     int numBars = 80;
+    bool firstClick = true;
     std::vector<sf::RectangleShape> bars;
     std::random_device rd;
     SelectionSort selectionAlgorithm(window, bars, numBars);
@@ -36,8 +37,11 @@ int main()
                     if (randomizeButton.MouseHovering()) {
                         std::cout << "Button pressed" << std::endl;
                         std::mt19937 rng(rd());
-                        selectionAlgorithm.RandomizeArray(numBars, rng);
+                        if (!firstClick) {
+                            selectionAlgorithm.RandomizeArray(numBars, rng);
+                        }
                         selectionAlgorithm.RunSelectionSort();
+                        firstClick = false;
                     }
                     break;
             } 

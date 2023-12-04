@@ -20,7 +20,7 @@ class SortingAlgorithm {
 
         // generate random heights for each bar
         void RandomizeArray(int arrSize, std::mt19937 &rng) {
-            std::uniform_int_distribution<std::mt19937::result_type> distribution(50, 200); // this produces random integers within the given range
+            std::uniform_int_distribution<std::mt19937::result_type> distribution(50, 250); // this produces random integers within the given range
 
             if (!bars.empty()) {
                 bars.clear();
@@ -46,7 +46,7 @@ class SortingAlgorithm {
 
         // draw each bar again with delay
         void ResetWindow() {
-            std::this_thread::sleep_for(std::chrono::milliseconds(30));
+            std::this_thread::sleep_for(std::chrono::milliseconds(50));
 
             window.clear();
             DrawBars();
