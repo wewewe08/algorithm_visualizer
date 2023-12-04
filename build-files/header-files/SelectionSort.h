@@ -2,11 +2,11 @@
 
 #pragma once
 
-#include "SortingAlgorithm.h"
+#include "WindowManager.h"
 
-class SelectionSort : public SortingAlgorithm {
+class SelectionSort : public WindowManager {
     public:
-        SelectionSort (sf::RenderWindow& window, std::vector<sf::RectangleShape>& bars, int arrSize) : SortingAlgorithm(window, bars, arrSize), window(window) {
+        SelectionSort (sf::RenderWindow& window, std::vector<sf::RectangleShape>& bars, int arrSize) : WindowManager(window, bars, arrSize), window(window) {
             std::cout << "SelectionSort object created." << std::endl;
         }
 
@@ -21,7 +21,7 @@ class SelectionSort : public SortingAlgorithm {
             b.setSize(tempSizeA);
             float barBYPos = (window.getSize().y / 2.0f) - b.getSize().y;
             b.setPosition(startX + minIndex * (barWidth + spacing), barBYPos);
-            SortingAlgorithm::ResetWindow();
+            WindowManager::ResetWindow();
         }
 
         void RunSelectionSort() {
@@ -29,29 +29,29 @@ class SelectionSort : public SortingAlgorithm {
             for (int i = 0; i < arrSize - 1; ++i) {
                 int minIndex = i;
                 for (int j = i + 1; j < arrSize; ++j) {
-                    SortingAlgorithm::ChangeColors(SortingAlgorithm::bars[j], comparingColor);
-                    if (SortingAlgorithm::bars[j].getSize().y < SortingAlgorithm::bars[minIndex].getSize().y) {
-                        SortingAlgorithm::ChangeColors(SortingAlgorithm::bars[minIndex], sf::Color::White); // reset color to white
+                    WindowManager::ChangeColors(WindowManager::bars[j], comparingColor);
+                    if (WindowManager::bars[j].getSize().y < WindowManager::bars[minIndex].getSize().y) {
+                        WindowManager::ChangeColors(WindowManager::bars[minIndex], sf::Color::White); // reset color to white
                         minIndex = j;
                         colorChangeThreads.emplace_back([&](){
-                            SortingAlgorithm::ChangeColors(SortingAlgorithm::bars[minIndex], minIndexColor); // change color to new minIndex
-                            std::cout << "changed: " << SortingAlgorithm::bars[minIndex].getSize().y << std::endl;
+                            WindowManager::ChangeColors(WindowManager::bars[minIndex], minIndexColor); // change color to new minIndex
+                            std::cout << "changed: " << WindowManager::bars[minIndex].getSize().y << std::endl;
                         });
                     }
-                    SortingAlgorithm::ResetThreads(colorChangeThreads);
-                    SortingAlgorithm::ResetWindow();
+                    WindowManager::ResetThreads(colorChangeThreads);
+                    WindowManager::ResetWindow();
 
                     // dont reset minIndex color bar
-                    if (SortingAlgorithm::bars[j].getFillColor() != minIndexColor) {
-                        SortingAlgorithm::ChangeColors(SortingAlgorithm::bars[j], sf::Color::White);
+                    if (WindowManager::bars[j].getFillColor() != minIndexColor) {
+                        WindowManager::ChangeColors(WindowManager::bars[j], sf::Color::White);
                     }
                 }
                 // swapping elements
-                SwapBars(SortingAlgorithm::bars[i], SortingAlgorithm::bars[minIndex], i, minIndex);
-                SortingAlgorithm::ResetWindow();
+                SwapBars(WindowManager::bars[i], WindowManager::bars[minIndex], i, minIndex);
+                WindowManager::ResetWindow();
             }
             // change last bar color
-            SortingAlgorithm::ChangeColors(SortingAlgorithm::bars[arrSize - 1], sortedColor);
+            WindowManager::ChangeColors(WindowManager::bars[arrSize - 1], sortedColor);
             std::cout << "Finished selection sort." << std::endl;
         }
 

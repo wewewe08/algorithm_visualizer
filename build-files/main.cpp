@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 
-#include "header-files/SortingAlgorithm.h"
+#include "header-files/WindowManager.h"
 #include "header-files/SelectionSort.h"
 
 #include "header-files/ImageButton.h"

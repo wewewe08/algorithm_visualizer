@@ -1,4 +1,4 @@
-// SortingAlgorithm.h
+// WindowManager.h
 
 #pragma once
 
@@ -9,7 +9,7 @@
 #include <thread>
 #include <chrono>
 
-class SortingAlgorithm {
+class WindowManager {
     public:
         std::vector<sf::RectangleShape> bars;
         int barWidth{};
@@ -63,7 +63,7 @@ class SortingAlgorithm {
         }
     
     protected:
-        SortingAlgorithm(sf::RenderWindow& window, std::vector<sf::RectangleShape>& b, int as) : window(window)
+        WindowManager(sf::RenderWindow& window, std::vector<sf::RectangleShape>& b, int as) : window(window)
         {
             bars = b;
             barWidth = 8;
