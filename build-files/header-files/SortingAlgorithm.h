@@ -46,7 +46,7 @@ class SortingAlgorithm {
 
         // draw each bar again with delay
         void ResetWindow() {
-            std::this_thread::sleep_for(std::chrono::milliseconds(50));
+            std::this_thread::sleep_for(delay);
 
             window.clear();
             DrawBars();
@@ -75,4 +75,5 @@ class SortingAlgorithm {
 
     private:
         sf::RenderWindow& window;
+        std::chrono::milliseconds delay = std::chrono::milliseconds(10);
 };
