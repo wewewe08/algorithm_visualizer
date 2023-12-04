@@ -21,6 +21,7 @@ class SelectionSort : public WindowManager {
             b.setSize(tempSizeA);
             float barBYPos = (window.getSize().y / 2.0f) - b.getSize().y;
             b.setPosition(startX + minIndex * (barWidth + spacing), barBYPos);
+            b.setFillColor(sf::Color::White);
         }
 
         void RunSelectionSort() {
@@ -46,7 +47,6 @@ class SelectionSort : public WindowManager {
                 }
                 // swapping elements
                 SwapBars(WindowManager::bars[i], WindowManager::bars[minIndex], i, minIndex);
-                WindowManager::ChangeColors(WindowManager::bars[minIndex], sf::Color::White); 
                 WindowManager::ResetWindow();
             }
             // change last bar color

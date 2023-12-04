@@ -75,5 +75,5 @@ class WindowManager {
 
     private:
         sf::RenderWindow& window;
-        std::chrono::milliseconds delay = std::chrono::milliseconds(30);
+        std::chrono::milliseconds delay = std::chrono::milliseconds(10);
 };

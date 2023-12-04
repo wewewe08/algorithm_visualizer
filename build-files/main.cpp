@@ -10,7 +10,7 @@ int main()
     sf::RenderWindow window(sf::VideoMode(800,600), "Algorithm Visualizer", sf::Style::Titlebar | sf::Style::Close);
 
     int numBars = 80;
-    bool canRandomizeArray = true;
+    bool canRandomizeArray = false;
     std::vector<sf::RectangleShape> bars;
     SelectionSort selectionAlgorithm(window, bars, numBars);
 
