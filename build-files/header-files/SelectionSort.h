@@ -31,10 +31,11 @@ class SelectionSort : public SortingAlgorithm {
                 for (int j = i + 1; j < arrSize; ++j) {
                     SortingAlgorithm::ChangeColors(SortingAlgorithm::bars[j], comparingColor);
                     if (SortingAlgorithm::bars[j].getSize().y < SortingAlgorithm::bars[minIndex].getSize().y) {
-                        SortingAlgorithm::ChangeColors(SortingAlgorithm::bars[minIndex], sf::Color::White);
+                        SortingAlgorithm::ChangeColors(SortingAlgorithm::bars[minIndex], sf::Color::White); // reset color to white
                         minIndex = j;
                         colorChangeThreads.emplace_back([&](){
-                            SortingAlgorithm::ChangeColors(SortingAlgorithm::bars[minIndex], minIndexColor);
+                            SortingAlgorithm::ChangeColors(SortingAlgorithm::bars[minIndex], minIndexColor); // change color to new minIndex
+                            std::cout << "changed: " << SortingAlgorithm::bars[minIndex].getSize().y << std::endl;
                         });
                     }
                     SortingAlgorithm::ResetThreads(colorChangeThreads);

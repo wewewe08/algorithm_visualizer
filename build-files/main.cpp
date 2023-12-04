@@ -1,6 +1,4 @@
 #include <SFML/Graphics.hpp>
-#include <thread>
-#include <chrono>
 
 #include "header-files/SortingAlgorithm.h"
 #include "header-files/SelectionSort.h"
@@ -14,14 +12,13 @@ int main()
     int numBars = 80;
     bool firstClick = true;
     std::vector<sf::RectangleShape> bars;
-    std::random_device rd;
     SelectionSort selectionAlgorithm(window, bars, numBars);
 
     std::string imgPath = "images/randomizeButton.png";
     ImageButton randomizeButton(window, imgPath);
     randomizeButton.SetPosition({100,450});
 
-    std::mt19937 rng(rd());
+    std::mt19937 rng(std::time(nullptr));
     selectionAlgorithm.RandomizeArray(numBars, rng);
 
     while (window.isOpen())
@@ -36,7 +33,7 @@ int main()
                 case sf::Event::MouseButtonPressed:
                     if (randomizeButton.MouseHovering()) {
                         std::cout << "Button pressed" << std::endl;
-                        std::mt19937 rng(rd());
+                        std::mt19937 rng(std::time(nullptr));
                         if (!firstClick) {
                             selectionAlgorithm.RandomizeArray(numBars, rng);
                         }
