@@ -21,7 +21,6 @@ class SelectionSort : public WindowManager {
             b.setSize(tempSizeA);
             float barBYPos = (window.getSize().y / 2.0f) - b.getSize().y;
             b.setPosition(startX + minIndex * (barWidth + spacing), barBYPos);
-            WindowManager::ResetWindow();
         }
 
         void RunSelectionSort() {
@@ -31,11 +30,10 @@ class SelectionSort : public WindowManager {
                 for (int j = i + 1; j < arrSize; ++j) {
                     WindowManager::ChangeColors(WindowManager::bars[j], comparingColor);
                     if (WindowManager::bars[j].getSize().y < WindowManager::bars[minIndex].getSize().y) {
-                        WindowManager::ChangeColors(WindowManager::bars[minIndex], sf::Color::White); // reset color to white
+                        WindowManager::ChangeColors(WindowManager::bars[minIndex], sf::Color::White); 
                         minIndex = j;
                         colorChangeThreads.emplace_back([&](){
                             WindowManager::ChangeColors(WindowManager::bars[minIndex], minIndexColor); // change color to new minIndex
-                            std::cout << "changed: " << WindowManager::bars[minIndex].getSize().y << std::endl;
                         });
                     }
                     WindowManager::ResetThreads(colorChangeThreads);
@@ -48,6 +46,7 @@ class SelectionSort : public WindowManager {
                 }
                 // swapping elements
                 SwapBars(WindowManager::bars[i], WindowManager::bars[minIndex], i, minIndex);
+                WindowManager::ChangeColors(WindowManager::bars[minIndex], sf::Color::White); 
                 WindowManager::ResetWindow();
             }
             // change last bar color
