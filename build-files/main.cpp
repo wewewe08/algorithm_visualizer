@@ -10,16 +10,13 @@ int main()
     sf::RenderWindow window(sf::VideoMode(800,600), "Algorithm Visualizer", sf::Style::Titlebar | sf::Style::Close);
 
     int numBars = 80;
-    bool canRandomizeArray = false;
+    bool canRandomizeArray = true;
     std::vector<sf::RectangleShape> bars;
     SelectionSort selectionAlgorithm(window, bars, numBars);
 
     std::string imgPath = "images/randomizeButton.png";
     ImageButton randomizeButton(window, imgPath);
     randomizeButton.SetPosition({100,450});
-
-    std::mt19937 rng(std::time(nullptr));
-    selectionAlgorithm.RandomizeArray(numBars, rng);
 
     while (window.isOpen())
     {
@@ -32,21 +29,25 @@ int main()
                     break;
                 case sf::Event::MouseButtonPressed:
                     if (randomizeButton.MouseHovering()) {
-                        std::cout << "Button pressed" << std::endl;
-                        std::mt19937 rng(std::time(nullptr));
                         if (canRandomizeArray) {
+                            std::cout << "Randomizing..." << std::endl;
+                            canRandomizeArray = false;
+                            std::mt19937 rng(std::time(nullptr));
                             selectionAlgorithm.RandomizeArray(numBars, rng);
                         }
-                        selectionAlgorithm.RunSelectionSort();
-                        canRandomizeArray = false;
                     }
                     break;
             } 
         }
 
         window.clear();
-
         selectionAlgorithm.DrawBars();
+
+        if (!canRandomizeArray) {
+            selectionAlgorithm.RunSelectionSort();
+            canRandomizeArray =  true;
+        }
+
         randomizeButton.DrawButton();
 
         window.display();
