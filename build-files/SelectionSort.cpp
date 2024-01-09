@@ -1,10 +1,11 @@
+#include "header-files/WindowManager.h"
 #include "header-files/SelectionSort.h"
 
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <iostream>
 
-SelectionSort::SelectionSort(sf::RenderWindow& window, std::vector<sf::RectangleShape>& b, int as) : WindowManager(window, bars, arrSize) , window(window)
+SelectionSort::SelectionSort(sf::RenderWindow& window, std::vector<sf::RectangleShape>& b, int as) : WindowManager(window, b, as) , window(window)
 {
     std::cout << "SelectionSort object created." << std::endl;
 }

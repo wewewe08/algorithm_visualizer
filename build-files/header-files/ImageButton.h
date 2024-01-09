@@ -6,25 +6,16 @@
 #include <iostream>
 
 class ImageButton {
-    private:
-        sf::RenderWindow& window;
-        sf::Texture image;
-        sf::Sprite button;
+    sf::RenderWindow& window;
+    sf::Texture image;
+    sf::Sprite button;
 
     public:
-        ImageButton(sf::RenderWindow& w, std::string imgPath) : window(w)
-        {
-            if (!image.loadFromFile(imgPath)) {
-                std::cerr << "Failed to load image" << std::endl;
-            }
+        ImageButton(sf::RenderWindow& w, std::string imgPath);
 
-            button.setTexture(image);
-            button.setScale(1.0f, 1.0f);
-        }
+        void SetPosition(sf::Vector2f pos);
 
-    void SetPosition(sf::Vector2f pos) {}
+        void DrawButton();
 
-    void DrawButton() {}
-
-    bool MouseHovering() {}
+        bool MouseHovering();
 };

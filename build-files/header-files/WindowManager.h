@@ -9,9 +9,8 @@
 #include <chrono>
 
 class WindowManager {
-    private:
-        sf::RenderWindow& window;
-        std::chrono::milliseconds delay = std::chrono::milliseconds(20);
+    sf::RenderWindow& window;
+    std::chrono::milliseconds delay = std::chrono::milliseconds(20);
 
     public:
         std::vector<sf::RectangleShape> bars;
@@ -24,15 +23,15 @@ class WindowManager {
         WindowManager(sf::RenderWindow& window, std::vector<sf::RectangleShape>& b, int arrSize);
 
         // generate random heights for each bar
-        void RandomizeArray(int arrSize, std::mt19937 &rng) {}
+        void RandomizeArray(int arrSize, std::mt19937 &rng);
 
-        void DrawBars() {}
+        void DrawBars();
 
-        void ChangeColors(sf::RectangleShape &bar, sf::Color color) {}
+        void ChangeColors(sf::RectangleShape &bar, sf::Color color);
 
         // draw each bar again with delay
-        void ResetWindow() {}
+        void ResetWindow();
 
         // clears out thread vector
-        void ResetThreads(std::vector<std::thread> &colorChangeThreads) {}
+        void ResetThreads(std::vector<std::thread> &colorChangeThreads);
 };
