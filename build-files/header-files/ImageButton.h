@@ -1,6 +1,7 @@
 // Button.h
 
-#pragma once
+#ifndef IMAGE_BUTTON_H
+#define IMAGE_BUTTON_H
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
@@ -28,3 +29,5 @@ class ImageButton {
 
     bool MouseHovering() {}
 };
+
+#endif
