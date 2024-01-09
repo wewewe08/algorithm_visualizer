@@ -1,7 +1,6 @@
 // WindowManager.h
 
-#ifndef WINDOW_MANAGER_H
-#define WINDOW_MANAGER_H
+#pragma once
 
 #include <SFML/Graphics.hpp>
 #include <random>
@@ -37,5 +36,3 @@ class WindowManager {
         // clears out thread vector
         void ResetThreads(std::vector<std::thread> &colorChangeThreads) {}
 };
-
-#endif

@@ -1,7 +1,6 @@
 // SelectionSort.h
 
-#ifndef SELECTION_SORT_H
-#define SELECTION_SORT_H
+#pragma once
 
 #include <SFML/Graphics.hpp>
 #include "WindowManager.h"
@@ -20,5 +19,3 @@ class SelectionSort : public WindowManager {
 
         void RunSelectionSort() {}
 };
-
-#endif
