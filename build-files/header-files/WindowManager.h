@@ -1,7 +1,7 @@
 // WindowManager.h
 
-#ifndef WINDOW_MANAGER_H
-#define WINDOW_MANAGER_H
+#ifndef WINDOWMANAGER_H
+#define WINDOWMANAGER_H
 
 #include <SFML/Graphics.hpp>
 #include <random>

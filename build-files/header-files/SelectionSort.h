@@ -1,7 +1,7 @@
 // SelectionSort.h
 
-#ifndef SELECTION_SORT_H
-#define SELECTION_SORT_H
+#ifndef SELECTIONSORT_H
+#define SELECTIONSORT_H
 
 #include <SFML/Graphics.hpp>
 #include "WindowManager.h"
