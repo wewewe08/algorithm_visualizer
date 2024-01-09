@@ -1,4 +1,3 @@
-#include "header-files/WindowManager.h"
 #include "header-files/SelectionSort.h"
 
 #include <SFML/Graphics.hpp>
