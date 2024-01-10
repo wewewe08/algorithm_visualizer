@@ -12,6 +12,6 @@ MergeSort::MergeSort(sf::RenderWindow& window, std::vector<sf::RectangleShape>& 
 
 void MergeSort::RunMergeSort() {
     // implementation here 
-
+    
     std::cout << "Finished merge sort." << std::endl;
 }
