@@ -14,7 +14,5 @@ class MergeSort : public WindowManager {
     public:
         MergeSort(sf::RenderWindow& window, std::vector<sf::RectangleShape>& bars, int as);
 
-        // void SwapBars(sf::RectangleShape &a, sf::RectangleShape &b, int &index, int &minIndex);
-
         void RunMergeSort();
 };
