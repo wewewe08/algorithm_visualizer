@@ -43,6 +43,20 @@ void WindowManager::ChangeColors(sf::RectangleShape &bar, sf::Color color) {
     bar.setFillColor(color);
 }
 
+void WindowManager::SwapBars(sf::RectangleShape &a, sf::RectangleShape &b, int &index, int &minIndex) {
+    sf::Vector2f tempSizeA = a.getSize();
+
+    a.setSize(b.getSize());
+    float barAYPos = (window.getSize().y / 2.0f) - a.getSize().y;
+    a.setPosition(startX + index * (barWidth + spacing), barAYPos);
+    a.setFillColor(sortedColor);
+
+    b.setSize(tempSizeA);
+    float barBYPos = (window.getSize().y / 2.0f) - b.getSize().y;
+    b.setPosition(startX + minIndex * (barWidth + spacing), barBYPos);
+    //b.setFillColor(sf::Color::White);
+}
+
 // draw each bar again with delay
 void WindowManager::ResetWindow() {
     std::this_thread::sleep_for(delay);

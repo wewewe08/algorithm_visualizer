@@ -10,27 +10,13 @@ SelectionSort::SelectionSort(sf::RenderWindow& window, std::vector<sf::Rectangle
     std::cout << "SelectionSort object created." << std::endl;
 }
 
-void SelectionSort::SwapBars(sf::RectangleShape &a, sf::RectangleShape &b, int &index, int &minIndex) {
-    sf::Vector2f tempSizeA = a.getSize();
-
-    a.setSize(b.getSize());
-    float barAYPos = (window.getSize().y / 2.0f) - a.getSize().y;
-    a.setPosition(startX + index * (barWidth + spacing), barAYPos);
-    a.setFillColor(sortedColor);
-
-    b.setSize(tempSizeA);
-    float barBYPos = (window.getSize().y / 2.0f) - b.getSize().y;
-    b.setPosition(startX + minIndex * (barWidth + spacing), barBYPos);
-    //b.setFillColor(sf::Color::White);
-}
-
 void SelectionSort::RunSelectionSort() {
     std::vector<std::thread> colorChangeThreads;
 
     for (int i = 0; i < arrSize - 1; ++i) {
         int minIndex = i;
         for (int j = i + 1; j < arrSize; ++j) {
-            WindowManager::ChangeColors(WindowManager::bars[j], comparingColor);
+            WindowManager::ChangeColors(WindowManager::bars[j], WindowManager::comparingColor);
             if (WindowManager::bars[j].getSize().y < WindowManager::bars[minIndex].getSize().y) {
                 WindowManager::ChangeColors(WindowManager::bars[minIndex], sf::Color::White); 
                 minIndex = j;
@@ -49,7 +35,7 @@ void SelectionSort::RunSelectionSort() {
         }
         // swapping elements
         WindowManager::ChangeColors(WindowManager::bars[minIndex], sf::Color::White); 
-        SwapBars(WindowManager::bars[i], WindowManager::bars[minIndex], i, minIndex);
+        WindowManager::SwapBars(WindowManager::bars[i], WindowManager::bars[minIndex], i, minIndex);
         WindowManager::ResetWindow();
     }
     // change last bar color to green
