@@ -18,11 +18,13 @@ void InsertionSort::RunInsertionSort() {
         key = WindowManager::bars[i].getSize().y;
         j = i - 1;
 
-        while (j >= 0 && WindowManager::bars[j].getSize().y < key) {
-            //WindowManager::SwapBars(WindowManager::bars[j+1], WindowManager::bars[j], i, j);
+        while (j > 0 && WindowManager::bars[j].getSize().y > key) {
+            WindowManager::bars[j+1] = WindowManager::bars[j];
             j = j - 1;
+            WindowManager::ResetWindow();
         }
-        //WindowManager::SwapBars(WindowManager::bars[j+1], WindowManager::bars[key], i, j);
+        WindowManager::bars[j+1] = WindowManager::bars[key];
+        WindowManager::ResetWindow();
     }
 
     std::cout << "Finished insertion sort." << std::endl;
