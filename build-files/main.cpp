@@ -1,6 +1,8 @@
 #include <SFML/Graphics.hpp>
 
 #include "header-files/SelectionSort.h"
+#include "header-files/InsertionSort.h"
+
 #include "header-files/ImageButton.h"
 
 int main()
@@ -10,7 +12,8 @@ int main()
     int numBars = 80;
     bool canRandomizeArray = true;
     std::vector<sf::RectangleShape> bars;
-    SelectionSort selectionAlgorithm(window, bars, numBars);
+    //SelectionSort selectionAlgorithm(window, bars, numBars);
+    InsertionSort insertionAlgorithm(window, bars, numBars);
 
     std::string imgPath = "images/randomizeButton.png";
     ImageButton randomizeButton(window, imgPath);
@@ -31,7 +34,7 @@ int main()
                             std::cout << "Randomizing..." << std::endl;
                             canRandomizeArray = false;
                             std::mt19937 rng(std::time(nullptr));
-                            selectionAlgorithm.RandomizeArray(numBars, rng);
+                            insertionAlgorithm.RandomizeArray(numBars, rng);
                         }
                     }
                     break;
@@ -39,10 +42,10 @@ int main()
         }
 
         window.clear();
-        selectionAlgorithm.DrawBars();
+        insertionAlgorithm.DrawBars();
 
         if (!canRandomizeArray) {
-            selectionAlgorithm.RunSelectionSort();
+            insertionAlgorithm.RunInsertionSort();
             canRandomizeArray =  true;
         }
 
